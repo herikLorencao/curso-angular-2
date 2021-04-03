@@ -1,0 +1,20 @@
+<section>
+  <article>
+    <p>Selecione o tipo de alerta:</p>
+    <select #classe (change)="0">
+      <option value="alert-success">Sucesso</option>
+      <option value="alert-info">Info</option>
+      <option value="alert-warning">Alerta</option>
+      <option value="alert-danger">Erro</option>
+    </select>
+  </article>
+
+  <article>
+    <div class="alert {{ classe.value }}" role="alert">Texto conforme cor selecionada</div>
+    <div [class.alert-success]="classe.value == 'alert-success'" class="alert" role="alert">Sucesso</div>
+    <div [class.alert-info]="classe.value == 'alert-info'" class="alert" role="alert">Info</div>
+    <div [class.alert-warning]="classe.value == 'alert-warning'" class="alert" role="alert">Alerta</div>
+    <div [class.alert-danger]="classe.value == 'alert-danger'" class="alert" role="alert">Erro</div>
+    <div [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'" class="alert alert-danger" role="alert">Somente se Erro</div>
+  </article>
+</section>
