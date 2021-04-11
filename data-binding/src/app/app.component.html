@@ -2,4 +2,9 @@
 <!-- <app-data-binding-style></app-data-binding-style> -->
 <!-- <app-event-binding></app-event-binding> -->
 <!-- <app-two-way-binding></app-two-way-binding> -->
-<app-input-output-properties></app-input-output-properties>
+<!-- <app-input-output-properties></app-input-output-properties> -->
+<app-ciclo *ngIf="!cicloRemovido" [valor]="valorInicial"></app-ciclo>
+<div>
+  <button (click)="mudarValor()">Mudar Valor</button>
+  <button (click)="removerCiclo()">Remover Ciclo</button>
+</div>

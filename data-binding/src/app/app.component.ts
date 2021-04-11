@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'data-binding';
+  valorInicial: number = 0;
+  cicloRemovido: boolean = false;
+
+  mudarValor() {
+    this.valorInicial++;
+  }
+
+  removerCiclo() {
+    this.cicloRemovido = true;
+  }
 }
