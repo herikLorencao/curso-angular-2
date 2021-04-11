@@ -13,4 +13,8 @@ export class InputOutputPropertiesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  novoValor(evento) {
+    console.log(evento);
+  }
+
 }
