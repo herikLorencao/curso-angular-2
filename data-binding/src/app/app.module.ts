@@ -11,6 +11,7 @@ import { InputOutputPropertiesComponent } from './input-output-properties/input-
 import { InputOutputPropertiesComponentComponent } from './input-output-properties-component/input-output-properties-component.component';
 import { OutputPropertiesComponentComponent } from './output-properties-component/output-properties-component.component';
 import { CicloComponent } from './ciclo/ciclo.component';
+import { AcessoDomComponent } from './acesso-dom/acesso-dom.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CicloComponent } from './ciclo/ciclo.component';
     InputOutputPropertiesComponent,
     InputOutputPropertiesComponentComponent,
     OutputPropertiesComponentComponent,
-    CicloComponent
+    CicloComponent,
+    AcessoDomComponent
   ],
   imports: [
     BrowserModule,
