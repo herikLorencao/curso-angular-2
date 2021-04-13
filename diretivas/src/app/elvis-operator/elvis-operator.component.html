@@ -1,0 +1,3 @@
+<p>Descrição: {{ tarefa.description }}</p>
+<!-- <p>Responsável: {{ tarefa.admin != null ? tarefa.admin.name : '' }}</p> -->
+<p>Responsável: {{ tarefa.admin?.name }}</p>
