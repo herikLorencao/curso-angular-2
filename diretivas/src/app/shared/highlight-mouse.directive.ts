@@ -1,11 +1,11 @@
-import { Directive, HostListener, HostBinding/*, ElementRef, Renderer2 */} from '@angular/core';
+import { Directive, HostListener, HostBinding, Input, OnInit/*, ElementRef, Renderer2 */} from '@angular/core';
 
 @Directive({
-  selector: '[highlightMouse]'
+  selector: '[highlight]'
 })
-export class HighlightMouseDirective {
+export class HighlightMouseDirective implements OnInit {
   @HostListener('mouseover') onMouseOver() {
-    this.background = 'yellow';
+    this.background = this.highlightColor;
 
     // this.background = 'yellow';
 
@@ -17,7 +17,7 @@ export class HighlightMouseDirective {
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.background = 'transparent';
+    this.background = this.defaultColor;
 
     // this.background = 'transparent';
 
@@ -39,9 +39,18 @@ export class HighlightMouseDirective {
 
   // private backgroundColor: string;
 
+
+  @Input('highlight') highlightColor: string = 'yellow';
+  @Input() defaultColor: string = 'transparent';
+
   constructor(
     // private _elementRef: ElementRef,
     // private _renderer: Renderer2
   ) { }
+
+
+  ngOnInit(): void {
+    this.background = this.defaultColor;
+  }
 
 }
