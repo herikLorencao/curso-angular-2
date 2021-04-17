@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { LogService } from '../shared/log.service';
 
 @Injectable()
 export class CursosService {
@@ -6,6 +7,8 @@ export class CursosService {
   static cursoCriadoEmitter = new EventEmitter<string>();
 
   cursos: string[] = ['Angular', 'Java', 'Phonegap'];
+
+  constructor(private logService: LogService) {}
 
   getCursos() {
     return this.cursos;
@@ -15,5 +18,6 @@ export class CursosService {
     this.cursos.push(curso);
     this.cursoEmitter.emit(curso);
     CursosService.cursoCriadoEmitter.emit(curso);
+    this.logService.register(curso);
   }
 }
