@@ -1,18 +1,24 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import localePt from '@angular/common/locales/pt';
-
-registerLocaleData(localePt);
 
 import { AppComponent } from './app.component';
 import { ExemploPipesComponent } from './exemplo-pipes/exemplo-pipes.component';
 import { CamelCasePipe } from './camel-case.pipe';
 import { SettingsService } from './settings.service';
+import { FiltroArrayPipe } from './filtro-array.pipe';
 
+registerLocaleData(localePt);
 @NgModule({
-  declarations: [AppComponent, ExemploPipesComponent, CamelCasePipe],
-  imports: [BrowserModule],
+  declarations: [
+    AppComponent,
+    ExemploPipesComponent,
+    CamelCasePipe,
+    FiltroArrayPipe,
+  ],
+  imports: [BrowserModule, FormsModule],
   providers: [
     SettingsService,
     {
