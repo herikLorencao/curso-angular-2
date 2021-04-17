@@ -14,6 +14,18 @@
 <input type="text" #novoCursoInput>
 <button (click)="addLivro(novoCursoInput.value)">Adicionar Curso</button>
 <br>
+
+<p>Pipe Puro</p>
 <ul>
   <li *ngFor="let livroNome of livros | filtroArray:filtro ">{{ livroNome }}</li>
+</ul>
+
+<p>Pipe Impuro</p>
+<ul>
+  <li *ngFor="let livroNome of livros | filtroArrayImpuro:filtro ">{{ livroNome }}</li>
+</ul>
+
+<p>Maneira Correta de filtrar array (sem pipe)</p>
+<ul>
+  <li *ngFor="let livroNome of obterLivrosFiltrados()">{{ livroNome }}</li>
 </ul>

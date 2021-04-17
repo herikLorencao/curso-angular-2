@@ -25,4 +25,13 @@ export class ExemploPipesComponent implements OnInit {
   addLivro(livro: string) {
     this.livros.push(livro);
   }
+
+  obterLivrosFiltrados() {
+    if (this.livros.length === 0 || !this.filtro || this.filtro.trim() === '')
+      return this.livros;
+    const filterWord = this.filtro.toLowerCase();
+    return this.livros.filter((word) =>
+      word.toLowerCase().includes(filterWord)
+    );
+  }
 }
