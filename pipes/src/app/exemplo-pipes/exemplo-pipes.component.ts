@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-exemplo-pipes',
@@ -15,8 +16,12 @@ export class ExemploPipesComponent implements OnInit {
     url: 'http://cleancoder.com',
   };
 
-  livros: string[] = ['Java', 'Angular'];
-  filtro: string = '';
+  livros = ['Java', 'Angular'];
+  filtro = '';
+
+  valorAssincrono = new Promise((resolve, reject) => {
+    setInterval(() => resolve('Valor assíncrono'), 2000);
+  });
 
   constructor() {}
 
