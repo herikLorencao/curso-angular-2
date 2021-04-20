@@ -8,9 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
+import { CursoIndefinidoComponent } from './curso-indefinido/curso-indefinido.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, CursosComponent, CursoDetalheComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, CursosComponent, CursoDetalheComponent, CursoIndefinidoComponent],
   imports: [BrowserModule, AppRoutingModule /*, routing*/],
   providers: [],
   bootstrap: [AppComponent],

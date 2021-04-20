@@ -5,6 +5,7 @@ import { CursosComponent } from './cursos/cursos.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
+import { CursoIndefinidoComponent } from './curso-indefinido/curso-indefinido.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'cursos/:id',
     component: CursoDetalheComponent,
+  },
+  {
+    path: 'cursos/indefinido',
+    component: CursoIndefinidoComponent,
   },
 ];
 
