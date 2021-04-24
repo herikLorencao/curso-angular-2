@@ -1,1 +1,36 @@
-<p>aluno-form works!</p>
+<h5>{{ operacao }} do Aluno</h5>
+
+<div class="form">
+  <div class="input">
+    <label for="id">ID</label>
+    <input
+      [disabled]="!campoEditavel()"
+      id="id"
+      type="text"
+      [(ngModel)]="aluno.id"
+    />
+  </div>
+  <div class="input">
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" [(ngModel)]="aluno.nome" />
+  </div>
+  <div class="input">
+    <label for="email">Email</label>
+    <input id="email" type="text" [(ngModel)]="aluno.email" />
+  </div>
+</div>
+
+<button
+  *ngIf="!campoEditavel()"
+  (click)="adicionar()"
+  class="waves-effect waves-light btn"
+>
+  Adicionar
+</button>
+<button
+  *ngIf="campoEditavel()"
+  (click)="editar()"
+  class="waves-effect waves-light btn"
+>
+  Editar
+</button>

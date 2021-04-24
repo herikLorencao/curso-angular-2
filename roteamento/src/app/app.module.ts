@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AlunosComponent } from './alunos/alunos.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, AlunosComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent],
   imports: [BrowserModule, CursosModule, AlunosModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

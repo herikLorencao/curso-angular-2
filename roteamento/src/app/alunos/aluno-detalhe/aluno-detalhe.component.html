@@ -1,1 +1,20 @@
-<p>aluno-detalhe works!</p>
+<h5>Detalhes do Aluno</h5>
+
+<div class="form">
+  <div class="input">
+    <label for="id">ID</label>
+    <input readonly id="id" type="text" [value]="aluno?.id" />
+  </div>
+  <div class="input">
+    <label for="nome">Nome</label>
+    <input readonly id="nome" type="text" [value]="aluno?.nome" />
+  </div>
+  <div class="input">
+    <label for="email">Email</label>
+    <input readonly id="email" type="text" [value]="aluno?.email" />
+  </div>
+</div>
+
+<button (click)="editarAluno()" class="waves-effect waves-light btn">
+  Editar
+</button>
