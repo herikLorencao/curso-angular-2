@@ -11,6 +11,7 @@ import { AlunosService } from '../alunos.service';
 export class AlunoFormComponent implements OnInit {
   aluno: any = {};
   operacao: string = '';
+  formMudou = false;
   private inscricao: Subscription;
 
   constructor(
@@ -39,5 +40,14 @@ export class AlunoFormComponent implements OnInit {
 
   editar() {
     this.alunosService.edit(this.aluno);
+  }
+
+  onInput() {
+    this.formMudou = true;
+  }
+
+  manterForm() {
+    if (this.formMudou) return confirm('Deseja mudar de página?');
+    return true;
   }
 }

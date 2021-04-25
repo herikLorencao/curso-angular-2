@@ -12,11 +12,16 @@
   </div>
   <div class="input">
     <label for="nome">Nome</label>
-    <input id="nome" type="text" [(ngModel)]="aluno.nome" />
+    <input (input)="onInput()" id="nome" type="text" [(ngModel)]="aluno.nome" />
   </div>
   <div class="input">
     <label for="email">Email</label>
-    <input id="email" type="text" [(ngModel)]="aluno.email" />
+    <input
+      (input)="onInput()"
+      id="email"
+      type="text"
+      [(ngModel)]="aluno.email"
+    />
   </div>
 </div>
 
