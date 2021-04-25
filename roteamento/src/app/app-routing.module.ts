@@ -13,6 +13,16 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'cursos',
+    loadChildren: () =>
+      import('./cursos/cursos.module').then((module) => module.CursosModule),
+  },
+  {
+    path: 'alunos',
+    loadChildren: () =>
+      import('./alunos/alunos.module').then((module) => module.AlunosModule),
+  },
 ];
 
 @NgModule({

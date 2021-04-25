@@ -7,15 +7,15 @@ import { CursoIndefinidoComponent } from './curso-indefinido/curso-indefinido.co
 
 const routes = [
   {
-    path: 'cursos',
+    path: '',
     component: CursosComponent,
   },
   {
-    path: 'cursos/:id',
+    path: ':id',
     component: CursoDetalheComponent,
   },
   {
-    path: 'cursos/indefinido',
+    path: 'indefinido',
     component: CursoIndefinidoComponent,
   },
 ];
