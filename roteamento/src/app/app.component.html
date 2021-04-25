@@ -6,9 +6,9 @@
       <li routerLinkActive="active">
         <a routerLink="/cursos" [queryParams]="{ pagina: 1 }">Cursos</a>
       </li>
-      <li routerLinkActive="active">
+      <!-- <li routerLinkActive="active">
         <a [routerLink]="['cursos', inputIdCurso.value]">Curso com Id</a>
-      </li>
+      </li> -->
       <li routerLinkActive="active">
         <a routerLink="/alunos">Alunos</a>
       </li>
@@ -17,7 +17,7 @@
 </nav>
 
 <div class="container">
-  <p>Informe o ID do curso:</p>
-  <input id="inputCurso" type="text" #inputIdCurso />
+  <!-- <p>Informe o ID do curso:</p>
+  <input id="inputCurso" type="text" #inputIdCurso /> -->
   <router-outlet></router-outlet>
 </div>

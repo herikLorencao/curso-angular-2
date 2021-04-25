@@ -10,7 +10,7 @@ import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 @NgModule({
   imports: [CommonModule, FormsModule, AlunosRoutingModule],
-  exports: [FormsModule],
+  exports: [],
   declarations: [AlunosComponent, AlunoFormComponent, AlunoDetalheComponent],
   providers: [AlunosService],
 })

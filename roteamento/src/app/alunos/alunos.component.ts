@@ -7,7 +7,6 @@ import { AlunosService } from './alunos.service';
   styleUrls: ['./alunos.component.scss'],
 })
 export class AlunosComponent implements OnInit {
-  private eventListener: EventListener;
   alunos: any[];
 
   constructor(private alunosService: AlunosService) {}

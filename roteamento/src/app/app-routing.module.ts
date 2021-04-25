@@ -14,14 +14,14 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'cursos',
-    loadChildren: () =>
-      import('./cursos/cursos.module').then((module) => module.CursosModule),
-  },
-  {
     path: 'alunos',
     loadChildren: () =>
       import('./alunos/alunos.module').then((module) => module.AlunosModule),
+  },
+  {
+    path: 'cursos',
+    loadChildren: () =>
+      import('./cursos/cursos.module').then((module) => module.CursosModule),
   },
 ];
 
