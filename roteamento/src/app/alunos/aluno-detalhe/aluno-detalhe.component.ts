@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
+import { Aluno } from 'src/app/typings/aluno';
 import { AlunosService } from '../alunos.service';
 
 @Component({
@@ -21,9 +22,8 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.inscricao = this.route.params.subscribe((params: any) => {
-      const alunoId = params['id'];
-      this.aluno = this.alunosService.get(alunoId);
+    this.inscricao = this.route.data.subscribe((params: { aluno: Aluno }) => {
+      this.aluno = params.aluno;
     });
   }
 
