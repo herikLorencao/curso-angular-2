@@ -8,15 +8,14 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { AlunoFormComponent } from '../aluno-form/aluno-form.component';
+import { FormDeactivated } from './form-deactivated';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AlunosDeactivatedGuard
-  implements CanDeactivate<AlunoFormComponent> {
+export class AlunosDeactivatedGuard implements CanDeactivate<FormDeactivated> {
   canDeactivate(
-    component: AlunoFormComponent,
+    component: FormDeactivated,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot

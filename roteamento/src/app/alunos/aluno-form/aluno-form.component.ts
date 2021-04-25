@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { AlunosService } from '../alunos.service';
+import { FormDeactivated } from '../guards/form-deactivated';
 @Component({
   selector: 'app-aluno-form',
   templateUrl: './aluno-form.component.html',
   styleUrls: ['./aluno-form.component.scss'],
 })
-export class AlunoFormComponent implements OnInit {
+export class AlunoFormComponent implements OnInit, FormDeactivated {
   aluno: any = {};
   operacao: string = '';
   formMudou = false;
