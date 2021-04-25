@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: 'alunos',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./alunos/alunos.module').then((module) => module.AlunosModule),
   },
