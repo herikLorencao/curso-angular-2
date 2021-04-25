@@ -12,9 +12,10 @@ import { AuthGuard } from './guards/auth.guard';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, PaginaNaoEncontradaComponent],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],

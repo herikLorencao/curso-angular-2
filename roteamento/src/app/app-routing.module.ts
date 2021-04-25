@@ -4,10 +4,16 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard],
   },
@@ -27,6 +33,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./cursos/cursos.module').then((module) => module.CursosModule),
+  },
+  {
+    path: '**',
+    component: PaginaNaoEncontradaComponent,
   },
 ];
 
