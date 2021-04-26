@@ -31,5 +31,7 @@
     <div class="invalid-feedback">Informe um email válido</div>
   </div>
 
-  <button type="submit" class="btn btn-primary">Enviar</button>
+  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">
+    Enviar
+  </button>
 </form>
