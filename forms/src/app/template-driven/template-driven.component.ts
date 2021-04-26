@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-template-driven',
@@ -6,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./template-driven.component.scss'],
 })
 export class TemplateDrivenComponent implements OnInit {
+  usuario: any = {
+    nome: 'herik',
+    email: 'herik@mail.com',
+  };
+
   constructor() {}
 
   ngOnInit(): void {}
 
-  onSubmit(form) {
-    console.log(form);
+  onSubmit(form: NgForm) {
+    console.log(form.value);
+    console.log(this.usuario);
   }
 }
