@@ -8,8 +8,8 @@ import { NgForm } from '@angular/forms';
 })
 export class TemplateDrivenComponent implements OnInit {
   usuario: any = {
-    nome: 'herik',
-    email: 'herik@mail.com',
+    nome: null,
+    email: null,
   };
 
   constructor() {}
