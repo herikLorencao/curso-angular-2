@@ -47,7 +47,7 @@
       <input
         type="cep"
         class="form-control"
-        [class.is-invalid]="!cep.valid && cep.touched"
+        [ngClass]="aplicaCssErro(cep)"
         id="cep"
         name="cep"
         [ngModel]="usuario.cep"
@@ -63,7 +63,7 @@
       <input
         type="numero"
         class="form-control"
-        [class.is-invalid]="!numero.valid && numero.touched"
+        [ngClass]="aplicaCssErro(numero)"
         id="numero"
         name="numero"
         [ngModel]="usuario.numero"
@@ -79,7 +79,7 @@
       <input
         type="complemento"
         class="form-control"
-        [class.is-invalid]="!complemento.valid && complemento.touched"
+        [ngClass]="aplicaCssErro(complemento)"
         id="complemento"
         name="complemento"
         [ngModel]="usuario.complemento"
@@ -97,7 +97,7 @@
       <input
         type="rua"
         class="form-control"
-        [class.is-invalid]="!rua.valid && rua.touched"
+        [ngClass]="aplicaCssErro(rua)"
         id="rua"
         name="rua"
         [ngModel]="usuario.rua"
@@ -116,7 +116,7 @@
       <input
         type="bairro"
         class="form-control"
-        [class.is-invalid]="!bairro.valid && bairro.touched"
+        [ngClass]="aplicaCssErro(bairro)"
         id="bairro"
         name="bairro"
         [ngModel]="usuario.bairro"
@@ -132,8 +132,7 @@
       <label for="cidade">Cidade</label>
       <input
         type="cidade"
-        class="form-control"
-        [class.is-invalid]="!cidade.valid && cidade.touched"
+        [ngClass]="aplicaCssErro(cidade)"
         id="cidade"
         name="cidade"
         [ngModel]="usuario.cidade"
@@ -150,7 +149,7 @@
       <input
         type="estado"
         class="form-control"
-        [class.is-invalid]="!estado.valid && estado.touched"
+        [ngClass]="aplicaCssErro(estado)"
         id="estado"
         name="estado"
         [ngModel]="usuario.estado"

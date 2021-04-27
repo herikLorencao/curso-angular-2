@@ -20,4 +20,15 @@ export class TemplateDrivenComponent implements OnInit {
     console.log(form.value);
     console.log(this.usuario);
   }
+
+  verificaCampoValidTouched(campo: NgForm): boolean {
+    return !campo.valid && campo.touched;
+  }
+
+  aplicaCssErro(campo: NgForm) {
+    return {
+      'form-control': true,
+      'is-invalid': this.verificaCampoValidTouched(campo),
+    };
+  }
 }
