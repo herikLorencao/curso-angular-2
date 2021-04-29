@@ -55,6 +55,7 @@
           required
           cep
           #cep="ngModel"
+          (blur)="buscarCep($event.target.value, f)"
         />
         <div class="invalid-feedback">Informe um CEP válido</div>
       </div>
