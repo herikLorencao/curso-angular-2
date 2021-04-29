@@ -18,8 +18,9 @@ export class TemplateDrivenComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
-    console.log(this.usuario);
+    this.httpClient
+      .post('https://httpbin.org/post', form.value)
+      .subscribe((resp) => console.log(resp));
   }
 
   verificaCampoValidTouched(campo: NgForm): boolean {
