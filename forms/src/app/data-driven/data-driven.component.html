@@ -7,11 +7,13 @@
       <input
         type="text"
         class="form-control"
+        [ngClass]="aplicaCssErro('nome')"
         id="nome"
         formControlName="nome"
         placeholder="Informe seu nome"
         required
       />
+      <div class="invalid-feedback">Informe um nome válido</div>
     </div>
   </div>
 
@@ -23,6 +25,7 @@
     <div class="col-sm-12">
       <input
         type="email"
+        [ngClass]="aplicaCssErro('email')"
         class="form-control"
         id="email"
         formControlName="email"
@@ -30,6 +33,7 @@
         required
         email
       />
+      <div class="invalid-feedback">Informe um email válido</div>
     </div>
   </div>
 

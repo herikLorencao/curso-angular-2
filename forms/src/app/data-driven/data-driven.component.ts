@@ -44,4 +44,16 @@ export class DataDrivenComponent implements OnInit {
   resetar() {
     this.formulario.reset();
   }
+
+  aplicaCssErro(campo: string) {
+    return {
+      'form-control': true,
+      'is-invalid': this.verificaCampoValidTouched(campo),
+    };
+  }
+
+  verificaCampoValidTouched(nomeCampo: string): boolean {
+    const campo = this.formulario.get(nomeCampo);
+    return !campo.valid && campo.touched;
+  }
 }
