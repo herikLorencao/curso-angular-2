@@ -32,6 +32,16 @@ export class DataDrivenComponent implements OnInit {
 
     this.httpClient
       .post('https://httpbin.org/post', this.formulario.value)
-      .subscribe((resp) => console.log(resp));
+      .subscribe(
+        (resp) => {
+          console.log(resp);
+          this.resetar();
+        },
+        (erro) => alert('Ocorreu um erro')
+      );
+  }
+
+  resetar() {
+    this.formulario.reset();
   }
 }
