@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'data-driven',
     component: DataDrivenComponent,
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'data-driven',
+  },
 ];
 
 @NgModule({

@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { TemplateDrivenModule } from './template-driven/template-driven.module';
 
 import { AppComponent } from './app.component';
-import { DataDrivenComponent } from './data-driven/data-driven.component';
-
+import { DataDrivenModule } from './data-driven/data-driven.module';
 @NgModule({
-  declarations: [AppComponent, DataDrivenComponent],
-  imports: [BrowserModule, AppRoutingModule, TemplateDrivenModule],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    TemplateDrivenModule,
+    DataDrivenModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
