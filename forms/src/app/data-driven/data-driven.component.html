@@ -45,6 +45,7 @@
           type="cep"
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.cep')"
+          (blur)="buscarCep()"
           id="cep"
           formControlName="cep"
         />

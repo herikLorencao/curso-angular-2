@@ -65,4 +65,34 @@ export class DataDrivenComponent implements OnInit {
     const campo = this.formulario.get(nomeCampo);
     return !campo.valid && campo.touched;
   }
+
+  buscarCep() {
+    const cepInput = this.formulario.get('endereco.cep');
+    const cepFormatado = cepInput.value.replace(/\D/g, '');
+
+    if (cepFormatado !== '') {
+      const validacaoCep = /^[0-9]{8}$/;
+
+      if (validacaoCep.test(cepFormatado)) {
+        this.httpClient
+          .get(`https://viacep.com.br/ws/${cepFormatado}/json`)
+          .subscribe((dados) => this.adicionarValoresFormulario(dados));
+      }
+    }
+  }
+
+  adicionarValoresFormulario(dados: any) {
+    // Se quiser alterar o formulário inteiro
+    // formulario.setValue({})
+
+    this.formulario.patchValue({
+      endereco: {
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf,
+      },
+    });
+  }
 }
