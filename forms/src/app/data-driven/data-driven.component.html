@@ -37,91 +37,94 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <label for="cep">CEP</label>
-      <input
-        type="cep"
-        class="form-control"
-        [ngClass]="aplicaCssErro('cep')"
-        id="cep"
-        formControlName="cep"
-      />
-      <div class="invalid-feedback">Informe um CEP válido</div>
+  <div formGroupName="endereco">
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="cep">CEP</label>
+        <input
+          type="cep"
+          class="form-control"
+          [ngClass]="aplicaCssErro('endereco.cep')"
+          id="cep"
+          formControlName="cep"
+        />
+        <div class="invalid-feedback">Informe um CEP válido</div>
+      </div>
+
+      <div class="col-sm-3">
+        <label for="numero">Número</label>
+        <input
+          type="numero"
+          class="form-control"
+          [ngClass]="aplicaCssErro('endereco.numero')"
+          id="numero"
+          formControlName="numero"
+        />
+        <div class="invalid-feedback">Informe um número válido</div>
+      </div>
+
+      <div class="col-sm-6">
+        <label for="complemento">Complemento</label>
+        <input
+          type="complemento"
+          class="form-control"
+          [ngClass]="aplicaCssErro('endereco.complemento')"
+          id="complemento"
+          formControlName="complemento"
+        />
+        <div class="invalid-feedback">Informe um complemento válido</div>
+      </div>
     </div>
 
-    <div class="col-sm-3">
-      <label for="numero">Número</label>
-      <input
-        type="numero"
-        class="form-control"
-        [ngClass]="aplicaCssErro('numero')"
-        id="numero"
-        formControlName="numero"
-      />
-      <div class="invalid-feedback">Informe um número válido</div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <label for="rua">Rua</label>
+        <input
+          type="rua"
+          class="form-control"
+          [ngClass]="aplicaCssErro('endereco.rua')"
+          id="rua"
+          formControlName="rua"
+        />
+        <div class="invalid-feedback">Informe um rua válida</div>
+      </div>
     </div>
 
-    <div class="col-sm-6">
-      <label for="complemento">Complemento</label>
-      <input
-        type="complemento"
-        class="form-control"
-        [ngClass]="aplicaCssErro('complemento')"
-        id="complemento"
-        formControlName="complemento"
-      />
-      <div class="invalid-feedback">Informe um complemento válido</div>
-    </div>
-  </div>
+    <div class="form-group row">
+      <div class="col-sm-5">
+        <label for="bairro">Bairro</label>
+        <input
+          type="bairro"
+          class="form-control"
+          [ngClass]="aplicaCssErro('endereco.bairro')"
+          id="bairro"
+          formControlName="bairro"
+        />
+        <div class="invalid-feedback">Informe um bairro válido</div>
+      </div>
 
-  <div class="form-group row">
-    <div class="col-sm-12">
-      <label for="rua">Rua</label>
-      <input
-        type="rua"
-        class="form-control"
-        [ngClass]="aplicaCssErro('rua')"
-        id="rua"
-        formControlName="rua"
-      />
-      <div class="invalid-feedback">Informe um rua válida</div>
-    </div>
-  </div>
+      <div class="col-sm-4">
+        <label for="cidade">Cidade</label>
+        <input
+          type="cidade"
+          [ngClass]="aplicaCssErro('endereco.cidade')"
+          id="cidade"
+          formControlName="cidade"
+        />
+        <div class="invalid-feedback">Informe uma cidade válida</div>
+      </div>
 
-  <div class="form-group row">
-    <div class="col-sm-5">
-      <label for="bairro">Bairro</label>
-      <input
-        type="bairro"
-        class="form-control"
-        [ngClass]="aplicaCssErro('bairro')"
-        id="bairro"
-      />
-      <div class="invalid-feedback">Informe um bairro válido</div>
-    </div>
-
-    <div class="col-sm-4">
-      <label for="cidade">Cidade</label>
-      <input
-        type="cidade"
-        [ngClass]="aplicaCssErro('cidade')"
-        id="cidade"
-        formControlName="cidade"
-      />
-      <div class="invalid-feedback">Informe uma cidade válida</div>
-    </div>
-
-    <div class="col-sm-3">
-      <label for="estado">Estado</label>
-      <input
-        type="estado"
-        class="form-control"
-        [ngClass]="aplicaCssErro('estado')"
-        id="estado"
-        formControlName="estado"
-      />
-      <div class="invalid-feedback">Informe um estado válido</div>
+      <div class="col-sm-3">
+        <label for="estado">Estado</label>
+        <input
+          type="estado"
+          class="form-control"
+          [ngClass]="aplicaCssErro('endereco.estado')"
+          id="estado"
+          formControlName="estado"
+        />
+        <div class="invalid-feedback">Informe um estado válido</div>
+      </div>
     </div>
   </div>
 
