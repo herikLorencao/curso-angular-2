@@ -133,6 +133,43 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="estado">Estado</label>
+      <select
+        class="form-control"
+        [ngClass]="aplicaCssErro('endereco.estado')"
+        id="estado"
+        formControlName="estado"
+      >
+        <option *ngFor="let estado of estados | async" [value]="estado.sigla">
+          {{ estado.nome }}
+        </option>
+      </select>
+
+      <div class="invalid-feedback">Informe um estado válido</div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="Cargo">Cargo</label>
+      <select
+        class="form-control"
+        [ngClass]="aplicaCssErro('cargo')"
+        id="cargo"
+        [compareWith]="compararCargos"
+        formControlName="cargo"
+      >
+        <option *ngFor="let cargo of cargos" [ngValue]="cargo">
+          {{ cargo.desc }}
+        </option>
+      </select>
+
+      <div class="invalid-feedback">Informe um Cargo válido</div>
+    </div>
+  </div>
+
   <div class="row">
     <button class="col-sm-3" type="submit" class="btn btn-primary">
       Enviar
@@ -144,6 +181,14 @@
       class="btn"
     >
       Cancelar
+    </button>
+    <button
+      class="col-sm-3"
+      style="margin-left: 5px"
+      (click)="mudarCargo()"
+      class="btn btn-warning"
+    >
+      Mudar Cargo
     </button>
   </div>
 

@@ -20,6 +20,7 @@ export class DataDrivenComponent implements OnInit {
   // estados: Estado[];
   estados: Observable<Estado[]>;
   formulario: FormGroup;
+  cargos: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +40,7 @@ export class DataDrivenComponent implements OnInit {
     //   .subscribe((estados) => (this.estados = estados));
 
     this.estados = this.dropdownService.getEstadosBr();
+    this.cargos = this.dropdownService.getCargos();
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -52,6 +54,7 @@ export class DataDrivenComponent implements OnInit {
         cidade: [null, Validators.required],
         estado: [null, Validators.required],
       }),
+      cargo: [null],
     });
   }
 
@@ -118,5 +121,15 @@ export class DataDrivenComponent implements OnInit {
         estado: dados.uf,
       },
     });
+  }
+
+  mudarCargo() {
+    this.formulario
+      .get('cargo')
+      .setValue({ nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pleno' });
+  }
+
+  compararCargos(obj1, obj2) {
+    return obj1 && obj2 ? obj1.desc == obj2.desc : obj1 === obj2;
   }
 }
