@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-data-driven',
@@ -39,15 +44,28 @@ export class DataDrivenComponent implements OnInit {
   onSubmit() {
     console.log(this.formulario.value);
 
-    this.httpClient
-      .post('https://httpbin.org/post', this.formulario.value)
-      .subscribe(
-        (resp) => {
-          console.log(resp);
-          this.resetar();
-        },
-        (erro) => alert('Ocorreu um erro')
-      );
+    if (this.formulario.valid) {
+      this.httpClient
+        .post('https://httpbin.org/post', this.formulario.value)
+        .subscribe(
+          (resp) => {
+            console.log(resp);
+            this.resetar();
+          },
+          (erro) => alert('Ocorreu um erro')
+        );
+    } else {
+      this.verificaCamposFormulario(this.formulario);
+    }
+  }
+
+  verificaCamposFormulario(formGroup: FormGroup) {
+    console.log(formGroup);
+    Object.keys(formGroup.controls).forEach((campo) => {
+      const control = formGroup.get(campo);
+      if (control instanceof FormGroup) this.verificaCamposFormulario(control);
+      if (!control.valid) control.markAsDirty();
+    });
   }
 
   resetar() {
@@ -63,7 +81,7 @@ export class DataDrivenComponent implements OnInit {
 
   verificaCampoValidTouched(nomeCampo: string): boolean {
     const campo = this.formulario.get(nomeCampo);
-    return !campo.valid && campo.touched;
+    return (!campo.valid && campo.touched) || campo.dirty;
   }
 
   buscarCep() {
