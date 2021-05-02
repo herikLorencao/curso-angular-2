@@ -6,6 +6,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { DropdownService } from '../shared/services/dropdown.service';
+import { Estado } from '../shared/typings/estado';
 
 @Component({
   selector: 'app-data-driven',
@@ -13,11 +15,13 @@ import {
   styleUrls: ['./data-driven.component.scss'],
 })
 export class DataDrivenComponent implements OnInit {
+  estados: any;
   formulario: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private dropdownService: DropdownService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +29,10 @@ export class DataDrivenComponent implements OnInit {
     //   nome: new FormControl(null),
     //   email: new FormControl(null),
     // });
+
+    this.dropdownService
+      .getEstadosBr()
+      .subscribe((estados) => (this.estados = estados));
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
