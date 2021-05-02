@@ -42,7 +42,7 @@
       <div class="col-sm-3">
         <label for="cep">CEP</label>
         <input
-          type="cep"
+          type="text"
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.cep')"
           (blur)="buscarCep()"
@@ -55,7 +55,7 @@
       <div class="col-sm-3">
         <label for="numero">Número</label>
         <input
-          type="numero"
+          type="text"
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.numero')"
           id="numero"
@@ -67,7 +67,7 @@
       <div class="col-sm-6">
         <label for="complemento">Complemento</label>
         <input
-          type="complemento"
+          type="text"
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.complemento')"
           id="complemento"
@@ -81,7 +81,7 @@
       <div class="col-sm-12">
         <label for="rua">Rua</label>
         <input
-          type="rua"
+          type="text"
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.rua')"
           id="rua"
@@ -95,7 +95,7 @@
       <div class="col-sm-5">
         <label for="bairro">Bairro</label>
         <input
-          type="bairro"
+          type="text"
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.bairro')"
           id="bairro"
@@ -107,7 +107,7 @@
       <div class="col-sm-4">
         <label for="cidade">Cidade</label>
         <input
-          type="cidade"
+          type="text"
           [ngClass]="aplicaCssErro('endereco.cidade')"
           id="cidade"
           formControlName="cidade"
@@ -117,13 +117,17 @@
 
       <div class="col-sm-3">
         <label for="estado">Estado</label>
-        <input
-          type="estado"
+        <select
           class="form-control"
           [ngClass]="aplicaCssErro('endereco.estado')"
           id="estado"
           formControlName="estado"
-        />
+        >
+          <option *ngFor="let estado of estados | async" [value]="estado.sigla">
+            {{ estado.nome }}
+          </option>
+        </select>
+
         <div class="invalid-feedback">Informe um estado válido</div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { Estado } from '../shared/typings/estado';
@@ -16,7 +17,8 @@ import { Estado } from '../shared/typings/estado';
   styleUrls: ['./data-driven.component.scss'],
 })
 export class DataDrivenComponent implements OnInit {
-  estados: Estado[];
+  // estados: Estado[];
+  estados: Observable<Estado[]>;
   formulario: FormGroup;
 
   constructor(
@@ -32,9 +34,11 @@ export class DataDrivenComponent implements OnInit {
     //   email: new FormControl(null),
     // });
 
-    this.dropdownService
-      .getEstadosBr()
-      .subscribe((estados) => (this.estados = estados));
+    // this.dropdownService
+    //   .getEstadosBr()
+    //   .subscribe((estados) => (this.estados = estados));
+
+    this.estados = this.dropdownService.getEstadosBr();
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
