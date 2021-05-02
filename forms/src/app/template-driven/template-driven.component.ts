@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 
 @Component({
   selector: 'app-template-driven',
@@ -13,7 +14,10 @@ export class TemplateDrivenComponent implements OnInit {
     email: null,
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private cepService: ConsultaCepService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -38,17 +42,9 @@ export class TemplateDrivenComponent implements OnInit {
   }
 
   buscarCep(cep: string, form: NgForm) {
-    const cepFormatado = cep.replace(/\D/g, '');
-
-    if (cepFormatado !== '') {
-      const validacaoCep = /^[0-9]{8}$/;
-
-      if (validacaoCep.test(cepFormatado)) {
-        this.httpClient
-          .get(`https://viacep.com.br/ws/${cepFormatado}/json`)
-          .subscribe((dados) => this.adicionarValoresFormulario(form, dados));
-      }
-    }
+    this.cepService
+      .buscarCep(cep)
+      .subscribe((dados) => this.adicionarValoresFormulario(form, dados));
   }
 
   adicionarValoresFormulario(formulario: NgForm, dados: any) {

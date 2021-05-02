@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { Estado } from '../shared/typings/estado';
 
@@ -15,13 +16,14 @@ import { Estado } from '../shared/typings/estado';
   styleUrls: ['./data-driven.component.scss'],
 })
 export class DataDrivenComponent implements OnInit {
-  estados: any;
+  estados: Estado[];
   formulario: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+    private cepService: ConsultaCepService
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +74,7 @@ export class DataDrivenComponent implements OnInit {
     Object.keys(formGroup.controls).forEach((campo) => {
       const control = formGroup.get(campo);
       if (control instanceof FormGroup) this.verificaCamposFormulario(control);
-      if (!control.valid) control.markAsDirty();
+      if (!control.valid) control.markAsTouched();
     });
   }
 
@@ -89,22 +91,14 @@ export class DataDrivenComponent implements OnInit {
 
   verificaCampoValidTouched(nomeCampo: string): boolean {
     const campo = this.formulario.get(nomeCampo);
-    return (!campo.valid && campo.touched) || campo.dirty;
+    return !campo.valid && campo.touched;
   }
 
   buscarCep() {
     const cepInput = this.formulario.get('endereco.cep');
-    const cepFormatado = cepInput.value.replace(/\D/g, '');
-
-    if (cepFormatado !== '') {
-      const validacaoCep = /^[0-9]{8}$/;
-
-      if (validacaoCep.test(cepFormatado)) {
-        this.httpClient
-          .get(`https://viacep.com.br/ws/${cepFormatado}/json`)
-          .subscribe((dados) => this.adicionarValoresFormulario(dados));
-      }
-    }
+    this.cepService
+      .buscarCep(cepInput.value)
+      .subscribe((dados) => this.adicionarValoresFormulario(dados));
   }
 
   adicionarValoresFormulario(dados: any) {
