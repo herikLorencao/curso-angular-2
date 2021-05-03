@@ -22,6 +22,7 @@ export class DataDrivenComponent implements OnInit {
   formulario: FormGroup;
   cargos: any[];
   tecnologias: any[];
+  newsletterOpcoes: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,6 +44,7 @@ export class DataDrivenComponent implements OnInit {
     this.estados = this.dropdownService.getEstadosBr();
     this.cargos = this.dropdownService.getCargos();
     this.tecnologias = this.dropdownService.getTecnologias();
+    this.newsletterOpcoes = this.dropdownService.getNewsletter();
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -58,6 +60,7 @@ export class DataDrivenComponent implements OnInit {
       }),
       cargo: [null],
       tecnologia: [null],
+      newsletter: ['s'],
     });
   }
 

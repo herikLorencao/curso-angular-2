@@ -28,4 +28,11 @@ export class DropdownService {
       { nome: 'javascript', desc: 'Javascript' },
     ];
   }
+
+  getNewsletter() {
+    return [
+      { nome: 's', desc: 'Sim' },
+      { nome: 'n', desc: 'Não' },
+    ];
+  }
 }
