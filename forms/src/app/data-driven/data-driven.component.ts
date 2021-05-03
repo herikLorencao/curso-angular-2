@@ -61,6 +61,7 @@ export class DataDrivenComponent implements OnInit {
       cargo: [null],
       tecnologia: [null],
       newsletter: ['s'],
+      termos: [null, [Validators.required, Validators.requiredTrue]],
     });
   }
 
