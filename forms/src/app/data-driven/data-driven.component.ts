@@ -23,6 +23,7 @@ export class DataDrivenComponent implements OnInit {
   cargos: any[];
   tecnologias: any[];
   newsletterOpcoes: any[];
+  frameworks = ['Angular', 'React', 'Vue', 'Swelte'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,11 +63,20 @@ export class DataDrivenComponent implements OnInit {
       tecnologia: [null],
       newsletter: ['s'],
       termos: [null, [Validators.required, Validators.requiredTrue]],
+      frameworks: this.buildCheckboxDinamico(),
     });
   }
 
   onSubmit() {
-    console.log(this.formulario.value);
+    let formValues = Object.assign({}, this.formulario.value);
+
+    formValues = Object.assign(formValues, {
+      frameworks: formValues.frameworks
+        .map((v, i) => (v ? this.frameworks[i] : null))
+        .filter((v) => v != null),
+    });
+
+    console.log(formValues);
 
     if (this.formulario.valid) {
       this.httpClient
@@ -142,5 +152,10 @@ export class DataDrivenComponent implements OnInit {
 
   compararCargos(obj1, obj2) {
     return obj1 && obj2 ? obj1.desc == obj2.desc : obj1 === obj2;
+  }
+
+  buildCheckboxDinamico() {
+    const valoresForm = this.frameworks.map(() => new FormControl(false));
+    return this.formBuilder.array(valoresForm);
   }
 }
