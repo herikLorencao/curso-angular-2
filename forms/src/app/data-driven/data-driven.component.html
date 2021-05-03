@@ -168,6 +168,26 @@
 
       <div class="invalid-feedback">Informe um Cargo válido</div>
     </div>
+
+    <div class="col-sm-3">
+      <label for="tecnologa">Tecnologia</label>
+      <select
+        class="form-control"
+        [ngClass]="aplicaCssErro('tecnologia')"
+        id="tecnologia"
+        formControlName="tecnologia"
+        multiple
+      >
+        <option
+          *ngFor="let tecnologia of tecnologias"
+          [value]="tecnologia.nome"
+        >
+          {{ tecnologia.desc }}
+        </option>
+      </select>
+
+      <div class="invalid-feedback">Informe uma Tecnologia válida</div>
+    </div>
   </div>
 
   <div class="row">
@@ -188,7 +208,15 @@
       (click)="mudarCargo()"
       class="btn btn-warning"
     >
-      Mudar Cargo
+      Setar Cargo
+    </button>
+    <button
+      class="col-sm-3"
+      style="margin-left: 5px"
+      (click)="mudarTecnologia()"
+      class="btn btn-warning"
+    >
+      Setar Tecnologia
     </button>
   </div>
 

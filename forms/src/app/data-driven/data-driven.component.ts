@@ -21,6 +21,7 @@ export class DataDrivenComponent implements OnInit {
   estados: Observable<Estado[]>;
   formulario: FormGroup;
   cargos: any[];
+  tecnologias: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +42,7 @@ export class DataDrivenComponent implements OnInit {
 
     this.estados = this.dropdownService.getEstadosBr();
     this.cargos = this.dropdownService.getCargos();
+    this.tecnologias = this.dropdownService.getTecnologias();
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -55,6 +57,7 @@ export class DataDrivenComponent implements OnInit {
         estado: [null, Validators.required],
       }),
       cargo: [null],
+      tecnologia: [null],
     });
   }
 
@@ -127,6 +130,10 @@ export class DataDrivenComponent implements OnInit {
     this.formulario
       .get('cargo')
       .setValue({ nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pleno' });
+  }
+
+  mudarTecnologia() {
+    this.formulario.get('tecnologia').setValue(['java, ruby']);
   }
 
   compararCargos(obj1, obj2) {
