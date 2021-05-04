@@ -52,7 +52,7 @@ export class DataDrivenComponent implements OnInit {
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       endereco: this.formBuilder.group({
-        cep: [null, Validators.required],
+        cep: [null, [Validators.required, FormValidator.verificaCep]],
         numero: [null, Validators.required],
         complemento: [null],
         rua: [null, Validators.required],
@@ -114,6 +114,13 @@ export class DataDrivenComponent implements OnInit {
     };
   }
 
+  aplicaCssErroCep(campo: string) {
+    return {
+      'form-control': true,
+      'is-invalid': this.verificaCampoCep(campo),
+    };
+  }
+
   verificaCampoValidTouched(nomeCampo: string): boolean {
     const campo = this.formulario.get(nomeCampo);
     return !campo.valid && campo.touched;
@@ -161,5 +168,15 @@ export class DataDrivenComponent implements OnInit {
       valoresForm,
       FormValidator.requiredMinCheckbox()
     );
+  }
+
+  verificaRequired(nomeCampo: string) {
+    const campo = this.formulario.get(nomeCampo);
+    return campo.hasError('required');
+  }
+
+  verificaCampoCep(nomeCampo: string) {
+    const campo = this.formulario.get(nomeCampo);
+    return campo.hasError('cepInvalido');
   }
 }
