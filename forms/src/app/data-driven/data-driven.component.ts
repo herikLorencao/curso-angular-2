@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { Estado } from '../shared/typings/estado';
+import { FormValidator } from '../shared/utils/form-validator';
 
 @Component({
   selector: 'app-data-driven',
@@ -156,6 +157,9 @@ export class DataDrivenComponent implements OnInit {
 
   buildCheckboxDinamico() {
     const valoresForm = this.frameworks.map(() => new FormControl(false));
-    return this.formBuilder.array(valoresForm);
+    return this.formBuilder.array(
+      valoresForm,
+      FormValidator.requiredMinCheckbox()
+    );
   }
 }

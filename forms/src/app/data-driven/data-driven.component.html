@@ -217,10 +217,12 @@
           type="checkbox"
           [id]="frameworks[i]"
           [formControlName]="i"
+          [ngClass]="aplicaCssErro('frameworks')"
         />
         <label class="form-check-label" [for]="frameworks[i]">
           {{ frameworks[i] }}
         </label>
+        <div class="invalid-feedback">Selecione pelo menos 1 opção</div>
       </div>
     </div>
   </div>
