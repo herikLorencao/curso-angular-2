@@ -7,10 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { Estado } from '../shared/typings/estado';
 import { FormValidator } from '../shared/utils/form-validator';
+import { ValidacaoEmailService } from './services/validacao-email.service';
 
 @Component({
   selector: 'app-data-driven',
@@ -30,7 +32,8 @@ export class DataDrivenComponent implements OnInit {
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
     private dropdownService: DropdownService,
-    private cepService: ConsultaCepService
+    private cepService: ConsultaCepService,
+    private ValidacaoEmailService: ValidacaoEmailService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +53,13 @@ export class DataDrivenComponent implements OnInit {
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      email: [
+        null,
+        [Validators.required, Validators.email],
+        // Bind é necessário para o validador entender o escopo do service, poderia ser injetado por construtor
+        // Caso o método recebesse algum parametro
+        [this.validarEmailAssincrono.bind(this)],
+      ],
       confirmarEmail: [null, [FormValidator.equalsTo('email')]],
       endereco: this.formBuilder.group({
         cep: [null, [Validators.required, FormValidator.verificaCep]],
@@ -179,5 +188,11 @@ export class DataDrivenComponent implements OnInit {
   verificaCampoCep(nomeCampo: string) {
     const campo = this.formulario.get(nomeCampo);
     return campo.hasError('cepInvalido');
+  }
+
+  validarEmailAssincrono(formControl: FormControl) {
+    return this.ValidacaoEmailService.validar(formControl.value).pipe(
+      map((emailExiste) => (emailExiste ? { emailInvalido: true } : null))
+    );
   }
 }

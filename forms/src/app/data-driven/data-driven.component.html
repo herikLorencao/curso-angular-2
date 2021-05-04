@@ -33,6 +33,11 @@
         required
         email
       />
+      <!-- Para validação assincrona pode acessar formulario.get('campo').status == 'PENDING'
+        e gerar uma mensagem de aguardando enquanto a requisição é feita
+
+        os status são VALID, PENDING, INVALID
+      -->
       <div class="invalid-feedback">Informe um email válido</div>
     </div>
   </div>
