@@ -1,4 +1,4 @@
-import { FormArray, FormControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export class FormValidator {
   static requiredMinCheckbox(min = 1) {
@@ -22,5 +22,17 @@ export class FormValidator {
 
     // Caso de sucesso (Required cuidará desse caso)
     return null;
+  }
+
+  static equalsTo(otherField: string) {
+    return (formControl: FormControl) => {
+      if (!otherField) throw new Error('É necessário informar o campo');
+
+      if (!formControl.root || !(<FormGroup>formControl.root).controls)
+        return null;
+
+      const field = (<FormGroup>formControl.root).get(otherField);
+      return field.value === formControl.value ? null : { equalsTo: false };
+    };
   }
 }
