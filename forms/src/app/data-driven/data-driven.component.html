@@ -13,7 +13,10 @@
         placeholder="Informe seu nome"
         required
       />
-      <div class="invalid-feedback">Informe um nome válido</div>
+      <app-error-msg
+        [control]="formulario.get('nome')"
+        label="Nome"
+      ></app-error-msg>
     </div>
   </div>
 
