@@ -1,0 +1,10 @@
+<label [attr.for]="id">{{ label }}</label>
+<input
+  class="form-control"
+  [type]="type"
+  [ngClass]="classeCss"
+  [id]="id"
+  [readonly]="!!isReadOnly"
+  [(ngModel)]="value"
+/>
+<app-error-msg [control]="control" label="Nome"></app-error-msg>

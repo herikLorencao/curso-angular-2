@@ -1,22 +1,13 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formulario" class="form-horizontal">
   <div class="form-group row">
     <div class="col-sm-12">
-      <label for="nome">Nome</label>
-    </div>
-    <div class="col-sm-12">
-      <input
-        type="text"
-        class="form-control"
-        [ngClass]="aplicaCssErro('nome')"
-        id="nome"
-        formControlName="nome"
-        placeholder="Informe seu nome"
-        required
-      />
-      <app-error-msg
+      <app-input-field
+        [classeCss]="aplicaCssErro('nome')"
         [control]="formulario.get('nome')"
+        id="nome"
         label="Nome"
-      ></app-error-msg>
+        formControlName="nome"
+      ></app-input-field>
     </div>
   </div>
 
