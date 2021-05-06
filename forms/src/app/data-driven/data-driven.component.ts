@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { EMPTY, Observable } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { Estado } from '../shared/typings/estado';
@@ -19,10 +21,9 @@ import { ValidacaoEmailService } from './services/validacao-email.service';
   templateUrl: './data-driven.component.html',
   styleUrls: ['./data-driven.component.scss'],
 })
-export class DataDrivenComponent implements OnInit {
+export class DataDrivenComponent extends BaseFormComponent implements OnInit {
   // estados: Estado[];
   estados: Observable<Estado[]>;
-  formulario: FormGroup;
   cargos: any[];
   tecnologias: any[];
   newsletterOpcoes: any[];
@@ -34,7 +35,9 @@ export class DataDrivenComponent implements OnInit {
     private dropdownService: DropdownService,
     private cepService: ConsultaCepService,
     private ValidacaoEmailService: ValidacaoEmailService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     // this.formulario = new FormGroup({
@@ -98,7 +101,7 @@ export class DataDrivenComponent implements OnInit {
       );
   }
 
-  onSubmit() {
+  submit() {
     let formValues = Object.assign({}, this.formulario.value);
 
     formValues = Object.assign(formValues, {
@@ -109,39 +112,13 @@ export class DataDrivenComponent implements OnInit {
 
     console.log(formValues);
 
-    if (this.formulario.valid) {
-      this.httpClient
-        .post('https://httpbin.org/post', this.formulario.value)
-        .subscribe(
-          (resp) => {
-            console.log(resp);
-            this.resetar();
-          },
-          (erro) => alert('Ocorreu um erro')
-        );
-    } else {
-      this.verificaCamposFormulario(this.formulario);
-    }
-  }
-
-  verificaCamposFormulario(formGroup: FormGroup) {
-    console.log(formGroup);
-    Object.keys(formGroup.controls).forEach((campo) => {
-      const control = formGroup.get(campo);
-      if (control instanceof FormGroup) this.verificaCamposFormulario(control);
-      if (!control.valid) control.markAsTouched();
-    });
-  }
-
-  resetar() {
-    this.formulario.reset();
-  }
-
-  aplicaCssErro(campo: string) {
-    return {
-      'form-control': true,
-      'is-invalid': this.verificaCampoValidTouched(campo),
-    };
+    this.httpClient.post('https://httpbin.org/post', formValues).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.resetar();
+      },
+      (erro) => alert('Ocorreu um erro')
+    );
   }
 
   aplicaCssErroCep(campo: string) {
@@ -149,11 +126,6 @@ export class DataDrivenComponent implements OnInit {
       'form-control': true,
       'is-invalid': this.verificaCampoCep(campo),
     };
-  }
-
-  verificaCampoValidTouched(nomeCampo: string): boolean {
-    const campo = this.formulario.get(nomeCampo);
-    return !campo.valid && campo.touched;
   }
 
   buscarCep() {
@@ -198,11 +170,6 @@ export class DataDrivenComponent implements OnInit {
       valoresForm,
       FormValidator.requiredMinCheckbox()
     );
-  }
-
-  verificaRequired(nomeCampo: string) {
-    const campo = this.formulario.get(nomeCampo);
-    return campo.hasError('required');
   }
 
   verificaCampoCep(nomeCampo: string) {
