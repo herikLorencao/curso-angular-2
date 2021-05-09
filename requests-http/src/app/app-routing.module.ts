@@ -8,6 +8,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./cursos/cursos.module').then((m) => m.CursosModule),
   },
+  { path: 'rxjs-poc', loadChildren: () => import('./rxjs-poc/rxjs-poc.module').then(m => m.RxjsPocModule) },
 ];
 
 @NgModule({
