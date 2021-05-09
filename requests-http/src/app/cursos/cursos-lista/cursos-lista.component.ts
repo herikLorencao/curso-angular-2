@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AlertComponent } from 'src/app/shared/alert/alert.component';
+import { AlertService } from 'src/app/shared/alert.service';
 import { Curso } from 'src/app/typings/curso';
 import { CursosService } from '../cursos.service';
 
@@ -15,11 +14,10 @@ export class CursosListaComponent implements OnInit {
   // cursos: Curso[];
   cursos$: Observable<Curso[]>;
   error$ = new Subject<boolean>();
-  bsModalRef: BsModalRef;
 
   constructor(
     private service: CursosService,
-    private modalService: BsModalService
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -48,8 +46,6 @@ export class CursosListaComponent implements OnInit {
   }
 
   handleError(message: string) {
-    this.bsModalRef = this.modalService.show(AlertComponent);
-    this.bsModalRef.content.message = message;
-    this.bsModalRef.content.type = 'danger';
+    this.alertService.showAlertError(message);
   }
 }
