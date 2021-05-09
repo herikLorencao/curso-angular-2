@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Curso } from 'src/app/typings/curso';
 import { CursosService } from '../cursos.service';
 
@@ -11,11 +12,29 @@ import { CursosService } from '../cursos.service';
 export class CursosListaComponent implements OnInit {
   // cursos: Curso[];
   cursos$: Observable<Curso[]>;
+  error$ = new Subject<boolean>();
 
   constructor(private service: CursosService) {}
 
   ngOnInit(): void {
     // this.service.list().subscribe((dados) => (this.cursos = dados));
-    this.cursos$ = this.service.list();
+    this.onRefresh();
+  }
+
+  onRefresh() {
+    this.cursos$ = this.service.list().pipe(
+      // tap(),
+      // map(),
+      catchError((error) => {
+        console.error(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
+
+    // this.service.list().subscribe(
+    //   dados => this.cursos = dados,
+    //   error => console.log(error),
+    // )
   }
 }

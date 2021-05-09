@@ -1,6 +1,12 @@
 <div class="card">
   <div class="card-header">
     <h4>Cursos</h4>
+    <div class="float-right">
+      <button class="btn btn-primary" type="button">Novo</button>
+      <button (click)="onRefresh()" class="btn btn-secondary" type="button">
+        Atualizar
+      </button>
+    </div>
   </div>
   <div class="card-body">
     <table
@@ -33,15 +39,20 @@
       </tbody>
     </table>
     <ng-template #loading>
-      <div class="text-center">
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
-          <span class="sr-only">Loading...</span>
-        </div>
+      <div *ngIf="error$ | async; else spinner">
+        Erro no carregamento dos cursos. Tente novamente mais tarde.
       </div>
+      <ng-template #spinner>
+        <div class="text-center">
+          <div
+            class="spinner-border text-primary"
+            style="width: 3rem; height: 3rem"
+            role="status"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
     </ng-template>
   </div>
 </div>
