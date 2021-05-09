@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AlertService } from 'src/app/shared/alert.service';
+import { AlertService } from 'src/app/shared/alert/alert.service';
 import { Curso } from 'src/app/typings/curso';
 import { CursosService } from '../cursos.service';
 

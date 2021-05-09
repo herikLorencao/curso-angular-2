@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { AlertTypes } from '../typings/alert-types';
-import { AlertComponent } from './alert/alert.component';
+import { AlertTypes } from '../../typings/alert-types';
+import { AlertComponent } from './alert.component';
 
 @Injectable({
   providedIn: 'root',

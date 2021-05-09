@@ -2,7 +2,9 @@
   <div class="card-header">
     <h4>Cursos</h4>
     <div class="float-right">
-      <button class="btn btn-primary" type="button">Novo</button>
+      <button class="btn btn-primary" type="button" [routerLink]="['novo']">
+        Novo
+      </button>
       <button (click)="onRefresh()" class="btn btn-secondary" type="button">
         Atualizar
       </button>

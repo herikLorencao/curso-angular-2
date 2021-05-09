@@ -1,0 +1,31 @@
+<form [formGroup]="form" class="needs-validation mt-4" novalidate>
+  <div class="form-row">
+    <div class="col-md-12 mb-3">
+      <label for="validationCustom01">Nome do Curso</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        placeholder="Informe o nome"
+        formControlName="nome"
+        [ngClass]="handleValidCssField('nome')"
+      />
+      <div
+        class="invalid-feedback"
+        *ngFor="let errorMessage of getErrorMessage('nome')"
+      >
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+  <div class="form-row mt-2">
+    <div class="col-md-4">
+      <button (click)="onSubmit()" type="button" class="btn btn-primary mr-2">
+        Salvar
+      </button>
+      <button (click)="onCancel()" type="button" class="btn btn-secondary">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>
