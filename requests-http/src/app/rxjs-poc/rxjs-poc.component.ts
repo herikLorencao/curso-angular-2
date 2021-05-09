@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnviarValorService } from './enviar-valor.service';
 
 @Component({
   selector: 'app-rxjs-poc',
@@ -8,11 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class RxjsPocComponent implements OnInit {
   mostrarComponentes = true;
 
-  constructor() {}
+  constructor(private enviarValorService: EnviarValorService) {}
 
   ngOnInit(): void {}
 
-  emitirValor(valor: string) {}
+  emitirValor(valor: string) {
+    this.enviarValorService.emitirValor(valor);
+  }
 
   toggleMostrarComponentes() {
     this.mostrarComponentes = !this.mostrarComponentes;

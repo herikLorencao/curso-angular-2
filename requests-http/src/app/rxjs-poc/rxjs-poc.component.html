@@ -6,19 +6,26 @@
         <input type="text" class="form-control" placeholder="Valor" #valor />
       </div>
       <div class="form-group mx-sm-2">
-        <button class="btn btn-outline-primary">Emitir Valor</button>
+        <button
+          (click)="emitirValor(valor.value)"
+          class="btn btn-outline-primary"
+          type="button"
+        >
+          Emitir Valor
+        </button>
       </div>
       <div class="form-group mx-sm-2">
         <button
           (click)="toggleMostrarComponentes()"
           class="btn btn-outline-danger"
+          type="button"
         >
           Mostrar / Destruir Componentes
         </button>
       </div>
     </form>
   </div>
-  <div class="row mt-4 ml-3">
+  <div class="row mt-4 ml-3" *ngIf="mostrarComponentes">
     <app-sem-unsubscribe class="col-md-4"></app-sem-unsubscribe>
     <app-unsubscribe-poc class="col-md-4"></app-unsubscribe-poc>
     <app-async-poc class="col-md-4"></app-async-poc>
