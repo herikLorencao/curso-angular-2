@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/shared/alert/alert.service';
@@ -17,7 +18,9 @@ export class CursosListaComponent implements OnInit {
 
   constructor(
     private service: CursosService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +48,9 @@ export class CursosListaComponent implements OnInit {
 
   handleError(message: string) {
     this.alertService.showAlertError(message);
+  }
+
+  onEdit(id: number) {
+    this.router.navigate(['editar', id], { relativeTo: this.route });
   }
 }

@@ -12,6 +12,10 @@ export class CursosService {
 
   constructor(private http: HttpClient) {}
 
+  get(id: number) {
+    return this.http.get<Curso>(`${this.API}/${id}`).pipe(take(1));
+  }
+
   list() {
     return this.http.get<Curso[]>(this.API).pipe(delay(2000));
   }
