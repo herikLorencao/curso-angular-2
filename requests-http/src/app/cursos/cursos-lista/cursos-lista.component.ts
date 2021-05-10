@@ -32,9 +32,7 @@ export class CursosListaComponent implements OnInit {
       catchError((error) => {
         // console.error(error);
         // this.error$.next(true);
-        this.handleError(
-          'Erro no carregamento dos cursos. Tente novamente mais tarde.'
-        );
+        this.handleError('Erro no carregamento dos cursos');
         return EMPTY;
       })
     );

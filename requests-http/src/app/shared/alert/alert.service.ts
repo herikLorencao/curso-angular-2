@@ -9,10 +9,14 @@ import { AlertComponent } from './alert.component';
 export class AlertService {
   constructor(private modalService: BsModalService) {}
 
-  private showAlert(message: string, type: AlertTypes) {
+  private showAlert(message: string, type: AlertTypes, dismissTime?: number) {
     const bsModalRef = this.modalService.show(AlertComponent);
     bsModalRef.content.message = message;
     bsModalRef.content.type = type;
+
+    if (dismissTime) {
+      setInterval(() => bsModalRef.hide(), dismissTime);
+    }
   }
 
   showAlertError(message: string) {
@@ -20,6 +24,6 @@ export class AlertService {
   }
 
   showAlertSuccess(message: string) {
-    this.showAlert(message, AlertTypes.SUCCESS);
+    this.showAlert(message, AlertTypes.SUCCESS, 3000);
   }
 }
