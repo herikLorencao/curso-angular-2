@@ -58,13 +58,21 @@ export class CursoFormComponent extends BaseFormComponent implements OnInit {
   //   });
   // }
 
+  getMensagemSucessoForm(curso: Curso) {
+    return !curso.id ? 'Curso criado com sucesso' : 'Curso editado com sucesso';
+  }
+
+  getMensagemErroForm(curso: Curso) {
+    return !curso.id ? 'Erro ao cadastrar o curso' : 'Erro ao editar o curso';
+  }
+
   submit(values: any) {
-    this.service.create(values).subscribe(
+    this.service.save(values).subscribe(
       (success) => {
         this.location.back();
-        this.modal.showAlertSuccess('Curso criado com sucesso');
+        this.modal.showAlertSuccess(this.getMensagemSucessoForm(values));
       },
-      (error) => this.modal.showAlertError('Erro ao cadastrar o curso')
+      (error) => this.modal.showAlertError(this.getMensagemErroForm(values))
     );
   }
 }

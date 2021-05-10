@@ -5,12 +5,16 @@
       "nome": "Angular"
     },
     {
-      "nome": "teste",
-      "id": 2
+      "id": 2,
+      "nome": "React"
     },
     {
       "nome": "Java",
       "id": 3
+    },
+    {
+      "id": 4,
+      "nome": "Vue JS v3"
     }
   ]
 }
