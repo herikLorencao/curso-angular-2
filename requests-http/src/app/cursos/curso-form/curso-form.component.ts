@@ -25,21 +25,23 @@ export class CursoFormComponent extends BaseFormComponent implements OnInit {
 
   ngOnInit(): void {
     // Nesse caso em específico o próprio Angular faz o unsubscribe
-    this.route.params
-      .pipe(
-        map((params) => params['id']),
-        switchMap((id) => this.service.get(id))
-      )
-      .subscribe((curso) => this.atualizaDadosFormulario(curso));
+    // this.route.params
+    //   .pipe(
+    //     map((params) => params['id']),
+    //     switchMap((id) => this.service.get(id))
+    //   )
+    //   .subscribe((curso) => this.atualizaDadosFormulario(curso));
 
     // concatMap -> ordem da requisição importa
     // mergeMap -> ordem não importa
     // exhaustMap -> executa requisições na ordem de chamada (bom para fazer login)
 
+    const curso = <Curso>this.route.snapshot.data['curso'];
+
     this.form = this.formBuilder.group({
-      id: [null],
+      id: [curso.id],
       nome: [
-        null,
+        curso.nome,
         [
           Validators.required,
           Validators.minLength(2),
@@ -49,12 +51,12 @@ export class CursoFormComponent extends BaseFormComponent implements OnInit {
     });
   }
 
-  atualizaDadosFormulario(dados: Curso) {
-    this.form.patchValue({
-      id: dados.id,
-      nome: dados.nome,
-    });
-  }
+  // atualizaDadosFormulario(dados: Curso) {
+  //   this.form.patchValue({
+  //     id: dados.id,
+  //     nome: dados.nome,
+  //   });
+  // }
 
   submit(values: any) {
     this.service.create(values).subscribe(
