@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { AlertService } from 'src/app/shared/alert/alert.service';
 import { Curso } from 'src/app/typings/curso';
 import { CursosService } from '../cursos.service';
@@ -18,8 +18,8 @@ export class CursosListaComponent implements OnInit {
   // cursos: Curso[];
   cursos$: Observable<Curso[]>;
   error$ = new Subject<boolean>();
-  idCursoSelecionado: number;
-  deleteModalRef: BsModalRef;
+  // idCursoSelecionado: number;
+  // deleteModalRef: BsModalRef;
 
   constructor(
     private service: CursosService,
@@ -61,26 +61,19 @@ export class CursosListaComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    this.idCursoSelecionado = id;
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {
-      class: 'modal-sm',
-    });
-  }
-
-  confirmRemove() {
-    this.service.remove(this.idCursoSelecionado).subscribe(
-      (success) => {
-        this.onRefresh();
-        this.deleteModalRef.hide();
-      },
-      (error) => {
-        this.alertService.showAlertError('Não foi possível remover o curso');
-        this.deleteModalRef.hide();
-      }
-    );
-  }
-
-  declineRemove() {
-    this.deleteModalRef.hide();
+    this.alertService
+      .showConfirm('Remover Curso', 'Deseja remover o curso?')
+      .asObservable()
+      .pipe(
+        take(1),
+        switchMap((modalValue) =>
+          modalValue ? this.service.remove(id) : EMPTY
+        )
+      )
+      .subscribe(
+        (success) => this.onRefresh(),
+        (error) =>
+          this.alertService.showAlertError('Não foi possível remover o curso')
+      );
   }
 }
