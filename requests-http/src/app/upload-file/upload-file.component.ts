@@ -1,32 +1,51 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { UploadFileService } from './upload-file.service';
 
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.scss'],
 })
-export class UploadFileComponent implements OnInit {
-  constructor(private componentRef: ElementRef) {}
+export class UploadFileComponent implements OnInit, OnDestroy {
+  files: Set<File>;
+  uploadSubscription$: Subscription;
+
+  constructor(
+    private componentRef: ElementRef,
+    private uploadService: UploadFileService
+  ) {}
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.uploadSubscription$.unsubscribe();
+  }
 
   onChange(event) {
     const label = <HTMLElement>(
       this.componentRef.nativeElement.querySelector('label')
     );
-    const files = <FileList>event['srcElement']['files'];
+    const files = event['srcElement']['files'];
     const fileNames = [];
+
+    this.files = new Set();
 
     for (let i = 0; i < files.length; i++) {
       fileNames.push(files[i].name);
+      this.files.add(files[i]);
     }
 
     label.innerText = fileNames.join(', ');
+  }
+
+  uploadFile() {
+    if (this.files && this.files.size > 0) {
+      const serverUrl = 'http://localhost:8000/upload';
+      // No caso por ter CORS o take(1) não vai funcionar
+      this.uploadSubscription$ = this.uploadService
+        .upload(this.files, serverUrl)
+        .subscribe();
+    }
   }
 }
