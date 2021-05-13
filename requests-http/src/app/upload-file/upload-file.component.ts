@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { filterResponse, uploadProgress } from '../shared/rxjs-operators';
 import { UploadFileService } from './upload-file.service';
 
 @Component({
@@ -51,12 +52,11 @@ export class UploadFileComponent implements OnInit, OnDestroy {
       // No caso por ter CORS o take(1) não vai funcionar
       this.uploadSubscription$ = this.uploadService
         .upload(this.files, serverUrl)
-        .subscribe((event: HttpEvent<Object>) => {
-          console.log(event);
-          if (event.type === HttpEventType.UploadProgress) {
-            this.percentageUpload = (event.loaded / event.total) * 100;
-          }
-        });
+        .pipe(
+          uploadProgress((progress) => (this.percentageUpload = progress)),
+          filterResponse()
+        )
+        .subscribe((resp) => console.log('Upload concluído'));
     }
   }
 }
