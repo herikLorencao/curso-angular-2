@@ -1,3 +1,8 @@
+import {
+  HttpEvent,
+  HttpEventType,
+  HttpUploadProgressEvent,
+} from '@angular/common/http';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { UploadFileService } from './upload-file.service';
@@ -10,6 +15,7 @@ import { UploadFileService } from './upload-file.service';
 export class UploadFileComponent implements OnInit, OnDestroy {
   files: Set<File>;
   uploadSubscription$: Subscription;
+  percentageUpload = 0;
 
   constructor(
     private componentRef: ElementRef,
@@ -45,7 +51,12 @@ export class UploadFileComponent implements OnInit, OnDestroy {
       // No caso por ter CORS o take(1) não vai funcionar
       this.uploadSubscription$ = this.uploadService
         .upload(this.files, serverUrl)
-        .subscribe();
+        .subscribe((event: HttpEvent<Object>) => {
+          console.log(event);
+          if (event.type === HttpEventType.UploadProgress) {
+            this.percentageUpload = (event.loaded / event.total) * 100;
+          }
+        });
     }
   }
 }

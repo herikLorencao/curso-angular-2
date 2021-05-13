@@ -12,6 +12,10 @@ export class UploadFileService {
     files.forEach((file) => formData.append('file', file, file.name));
 
     // const httpRequest = new HttpRequest('POST', url, files);
-    return this.httpClient.post<FormData>(url, formData);
+    // reportProgress: para conseguir ver % no upload
+    return this.httpClient.post<FormData>(url, formData, {
+      observe: 'events',
+      reportProgress: true,
+    });
   }
 }
