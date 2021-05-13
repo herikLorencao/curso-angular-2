@@ -41,7 +41,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
 
   uploadFile() {
     if (this.files && this.files.size > 0) {
-      const serverUrl = 'http://localhost:8000/upload';
+      const serverUrl = '/api/upload';
       // No caso por ter CORS o take(1) não vai funcionar
       this.uploadSubscription$ = this.uploadService
         .upload(this.files, serverUrl)
