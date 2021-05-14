@@ -27,9 +27,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Teste</td>
-          <td>1</td>
+        <tr *ngFor="let item of resultados$ | async">
+          <td>{{ item.name }}</td>
+          <td>{{ item.version }}</td>
         </tr>
       </tbody>
     </table>
