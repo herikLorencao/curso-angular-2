@@ -13,6 +13,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.get("/download", (req, res) => {
+  res.download("./download/example.txt");
+});
+
 const multipartMiddleware = multipart({ uploadDir: "./uploads" });
 app.post("/upload", multipartMiddleware, (req, res) => {
   const files = req.files;

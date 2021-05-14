@@ -59,4 +59,13 @@ export class UploadFileComponent implements OnInit, OnDestroy {
         .subscribe((resp) => console.log('Upload concluído'));
     }
   }
+
+  download() {
+    const serverUrl = '/api/download';
+    this.uploadService
+      .download(serverUrl, 'example.txt')
+      .subscribe((resp: any) =>
+        this.uploadService.handleDownloadFile(resp, 'example.txt')
+      );
+  }
 }
