@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'upload-file' },
+  { path: '', pathMatch: 'full', redirectTo: 'busca-reativa' },
   {
     path: 'cursos',
     loadChildren: () =>
@@ -18,6 +18,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./upload-file/upload-file.module').then(
         (m) => m.UploadFileModule
+      ),
+  },
+  {
+    path: 'busca-reativa',
+    loadChildren: () =>
+      import('./busca-reativa/busca-reativa.module').then(
+        (m) => m.BuscaReativaModule
       ),
   },
 ];
